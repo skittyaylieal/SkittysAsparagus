@@ -1,0 +1,137 @@
+//this is a depracated version of modEntry.cs, for if the rollback on out of season indicator doesnt work.
+
+using StardewModdingAPI;
+using StardewValley;
+using StardewValley.TerrainFeatures;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
+using System;
+using System.Linq;
+
+namespace SkittysAsparagus
+{
+    public class ModEntry : Mod
+    {
+        // Setup for textures and the custom out of season message
+        private Texture2D uiTexture;
+        private bool showOutOfSeasonMessage = false;
+        private int messageTimer = 0;
+
+        public override void Entry(IModHelper helper)
+        {
+            helper.Events.GameLoop.GameLaunched += (s, e) => // Checking game launch
+            {
+                InjectConfigurableCrop(); // "Injecting" 
+            };
+
+            helper.Events.Player.InventoryChanged += (s, e) =>
+            {
+                var cropData = Helper.GameContent.Load<Dictionary<int, string>>("Data/Crops");
+                if (e.AddedItems.Any(item => item?.ParentSheetIndex == int.Parse(cropData["YourCropID"].Split('/')[6])))
+                {
+                    if (!Game1.IsWinter && !Game1.IsSpring)
+                    {
+                        e.Player.removeItemFromInventory(e.AddedItems.First(item => item?.ParentSheetIndex == int.Parse(cropData["YourCropID"].Split('/')[6])));
+                        showOutOfSeasonMessage = true;
+                        helper.Events.GameLoop.UpdateTicked += HideMessageAfterDelay;
+                    }
+                }
+            };
+
+            helper.Events.Content.AssetReady += (s, e) =>
+            {
+                if (e.AssetNameEquals("LooseSprites/Cursors"))
+                {
+                    uiTexture = helper.Content.Load<Texture2D>("LooseSprites/Cursors", ContentSource.GameContent);
+                }
+            };
+
+            helper.Events.Display.RenderingHud += (s, e) =>
+            {
+                if (showOutOfSeasonMessage)
+                {
+                    DrawOutOfSeasonMessage(e.SpriteBatch);
+                }
+            };
+        }
+
+        private void InjectConfigurableCrop()
+        {
+            var cropData = Helper.GameContent.Load<Dictionary<int, string>>("Data/Crops");
+            if (cropData.ContainsKey("YourCropID"))
+            {
+                string[] cropInfo = cropData["YourCropID"].Split('/');
+                string harvestSeason = cropInfo[4];
+                int harvestItemID = int.Parse(cropInfo[5]);
+
+                var cropDataReflection = Helper.Reflection.GetField<Dictionary<int, string>>(typeof(Crop), "cropData").GetValue();
+                cropDataReflection["YourCropID"] = cropDataReflection["YourCropID"].Replace("StardewValley.Crop", "YourModNamespace.ConfigurableCrop");
+                Helper.Reflection.GetMethod(typeof(Crop), "cropData").SetValue(cropDataReflection);
+
+                Helper.Events.Content.AssetReady += (s, e) =>
+                {
+                    if (e.AssetNameEquals("Data/Crops"))
+                    {
+                        var reflectionCropData = Helper.Reflection.GetField<Dictionary<int, string>>(typeof(Crop), "cropData").GetValue();
+                        if (reflectionCropData.ContainsKey("YourCropID"))
+                        {
+                            reflectionCropData["YourCropID"] = reflectionCropData["YourCropID"].Replace("YourModNamespace.ConfigurableCrop", $"YourModNamespace.ConfigurableCrop/{harvestSeason}/{harvestItemID}");
+                        }
+                    }
+                };
+            }
+        }
+
+        private void HideMessageAfterDelay(object sender, StardewModdingAPI.Events.UpdateTickedEventArgs e)
+        {
+            messageTimer++;
+            if (messageTimer > 120)
+            {
+                showOutOfSeasonMessage = false;
+                messageTimer = 0;
+                Helper.Events.GameLoop.UpdateTicked -= HideMessageAfterDelay;
+            }
+        }
+
+        private void DrawOutOfSeasonMessage(SpriteBatch spriteBatch)
+        {
+            if (uiTexture == null) return;
+
+            // X Icon
+            Rectangle xIconRect = new Rectangle(269, 471, 14, 14);
+            Vector2 xIconPos = new Vector2(8, Game1.viewport.Height - 172);
+            spriteBatch.Draw(uiTexture, xIconPos, xIconRect, Color.White);
+
+            // Background (Large Part)
+            Rectangle backgroundLargeRect = new Rectangle(293, 360, 22, 23);
+            Vector2 backgroundLargePos = new Vector2(xIconPos.X + 14, Game1.viewport.Height - 177);
+            spriteBatch.Draw(uiTexture, backgroundLargePos, backgroundLargeRect, Color.White);
+
+            // Background (Text Part) - Dynamic Calculation
+            Rectangle backgroundTextRect = new Rectangle(316, 361, 12, 21);
+            Vector2 backgroundTextPos = new Vector2(backgroundLargePos.X + 22, Game1.viewport.Height - 176);
+
+            // Calculate the number of background duplicates needed
+            string text = "Out of Season";
+            int textWidth = (int)Game1.smallFont.MeasureString(text).X;
+            int numDuplicates = (int)Math.Ceiling((double)textWidth / backgroundTextRect.Width);
+
+            // Draw the background duplicates
+            for (int i = 0; i < numDuplicates; i++)
+            {
+                spriteBatch.Draw(uiTexture, backgroundTextPos, backgroundTextRect, Color.White);
+                backgroundTextPos.X += backgroundTextRect.Width;
+            }
+
+            // Background (End Cap)
+            Rectangle backgroundEndCapRect = new Rectangle(329, 360, 11, 23);
+            Vector2 backgroundEndCapPos = new Vector2(backgroundTextPos.X, Game1.viewport.Height - 177);
+            spriteBatch.Draw(uiTexture, backgroundEndCapPos, backgroundEndCapRect, Color.White);
+
+            // "Out of Season" Text (Dynamically Rendered)
+            // We'll rely on the game's default rendering for now.
+            // If you want to customize the text rendering, you'll need to use SpriteFont and draw the text manually.
+        }
+    }
+}

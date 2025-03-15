@@ -1,0 +1,11 @@
+{
+	"Name": "Skitty's Asparagus",
+	"Author": "SkittyTheTransCat",
+	"Version": "1.0.0",
+	"Description": "A simple Content Patcher mod that I made that adds Asparagus and a couple dishes using it.",
+	"UniqueID": "Skitty.SkittysAsparagus",
+	"UpdateKeys": [],
+	"ContentPackFor": {
+		"UniqueID": "Pathoschild.ContentPatcher"
+	}
+}

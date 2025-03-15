@@ -1,0 +1,52 @@
+{
+  "Format": "2.5.0",
+  "Changes": [
+{
+      "Action": "EditData",
+      "Target": "Data/Crops",
+      "Entries": {
+        "SkittysAsparagus.AsparagusSeeds": {
+          "SeasonsToGrowIn": "spring winter",
+          "DaysToGrow": 9,
+          "Phases": [1, 2, 3, 2, 1], // Example growth stages after the "roots" stage
+          "HarvestSeason": "summer",
+          "HarvestItemId": "SkittysAsparagus.Asparagus",
+          "SeedName": "Asparagus Seeds",
+          "SeedDescription": "Plant these in spring or winter to grow asparagus which can be harvested in the spring.",
+          "Texture": "{{InternalAssetKey: assets/asparagusCrop.png}}",
+          "SpriteIndex": 0,
+          "Name": "Asparagus",
+          "Price": 165,
+          "Description": "A delicious spring vegetable.",
+          "Type": "Vegetable -75",
+          "Category": "Vegetable"
+        }
+      },
+   	
+      "Action": "EditData",
+      "Target": "Data/CraftingRecipes",
+      "Entries": {
+        "Pasta Asparagus": "SkittysAsparagus.Asparagus 1 Flour 1 Garlic 1/home/266/200/Pasta Asparagus/A flavorful pasta dish with fresh asparagus.",
+        "Spicy Asparagus Stir fry": "SkittysAsparagus.Asparagus 1 Hot Pepper 1 Oil 1/home/271/150/Spicy Asparagus Stir fry/A spicy and satisfying stir fry with asparagus.",
+        "Grilled Asparagus": "SkittysAsparagus.Asparagus 1/home/200/100/Grilled Asparagus/A simple but scrumptious grilled asparagus dish."
+		},
+
+      "Action": "EditData",
+      "Target": "Data/Objects",
+      "Entries": {
+        "SkittysAsparagus.AsparagusSeeds": "Asparagus Seeds/45/0/Seeds -74/Asparagus seeds. Plant these in spring or winter to grow asparagus. Harvest in Summer./SkittysAsparagus.png/0",
+        "SkittysAsparagus.Asparagus": "Asparagus/165/0/Vegetable -75/A delicious spring vegetable./SkittysAsparagus.png/1",
+        "SkittysAsparagus.PastaAsparagus": "Pasta Asparagus/240/0/Basic -75/A flavorful pasta dish with fresh asparagus./SkittysAsparagus.png/2",
+        "SkittysAsparagus.SpicyAsparagusStirfry": "Spicy Asparagus Stir fry/190/0/Basic -65/A spicy and satisfying stir fry with asparagus./SkittysAsparagus.png/3",
+        "SkittysAsparagus.GrilledAsparagus": "Grilled Asparagus/115/0/Basic -50/A simple but scrumptious grilled asparagus dish./SkittysAsparagus.png/4"
+    	},
+      "Action": "EditData",
+      "Target": "Data/TV/CookingChannel",
+      "Entries": {
+      	"32": "Pasta Asparagus/Pasta Asparagus! Now this is a childhood favourite of mine, I'd beg my parents for it the minute the asparagus season started! Just start by tossing some pasta in the boiling water and after 4 to 5 minutes you'll have some brilliant pasta. Then, chop up the asparagus spears into small, 1-2 inch peices, and toss them in, just like I'm doing here...",
+      	"33": "Spicy Asparagus Stir fry/Spicy Asparagus Stir Fry! It's a perfect way to get some healthy and hot greens on your plate. Sautee the asparagus in a little garlic oil and make sure to add plenty of fresh ginger and pepper. Now breathe deeply... Oh, that's rich",
+      	"34": "Grilled Asparagus/Grilled Asparagus! This is a great one to have by yourself, or share with a partner or friend. Its simple yet succulent nature is just perfect for sharing. Now, start with a simple sautéing of the asparagus, then add some salt and lemon and put a cooked one at the side."
+      }
+	}
+  ]
+}
