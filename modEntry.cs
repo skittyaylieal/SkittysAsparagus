@@ -28,8 +28,8 @@ namespace SkittysAsparagus
 
                 var cropDataReflection = Helper.Reflection.GetField<Dictionary<int, string>>(typeof(Crop), "cropData").GetValue(); // Gets value of the seeds cropdata for use later
                 cropDataReflection["SkittysAsparagus.AsparagusSeeds"] = 
-                cropDataReflection["SkittysAsparagus.AsparagusSeeds"].Replace("StardewValley.Crop",
-                 $"SkittysAsparagus.ConfigurableCrop/{harvestSeason}/{harvestItemID}"); // Puts our custom croptype script in place of the normal one, for this case
+                cropDataReflection["SkittysAsparagus.AsparagusSeeds"].Replace("StardewValley.Crop", // Replace default StardewValley.crop
+                 $"SkittysAsparagus.ConfigurableCrop/{harvestSeason}/{harvestItemID}"); // With ConfigurableCrop
                 Helper.Reflection.GetMethod(typeof(Crop), "cropData").SetValue(cropDataReflection); // Setting that back into the code
             }
         }
