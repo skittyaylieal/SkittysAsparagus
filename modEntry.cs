@@ -1,3 +1,5 @@
+// This is a test comment
+
 using StardewModdingAPI;
 using StardewValley;
 using StardewValley.TerrainFeatures;
