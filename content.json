@@ -23,12 +23,48 @@
         }
       },
    	
-      "Action": "EditData",
-      "Target": "Data/CraftingRecipes",
+    "Action": "EditData",
+      "Target": "Characters/Dialogue/MarriageDialoguePenny",
       "Entries": {
-        "Pasta Asparagus": "SkittysAsparagus.Asparagus 1 Flour 1 Garlic 1/home/266/200/Pasta Asparagus/A flavorful pasta dish with fresh asparagus.",
-        "Spicy Asparagus Stir fry": "SkittysAsparagus.Asparagus 1 Hot Pepper 1 Oil 1/home/271/150/Spicy Asparagus Stir fry/A spicy and satisfying stir fry with asparagus.",
-        "Grilled Asparagus": "SkittysAsparagus.Asparagus 1/home/200/100/Grilled Asparagus/A simple but scrumptious grilled asparagus dish."
+        "Rainy_Night_4": "I felt like making a nice dinner. I hope you like it. [212 214 225 209 200 SkittysAsparagus.PastaAsparagus]$h"
+      },
+
+    "Action": "EditData",
+      "Target": "Characters/Dialogue/MarriageDialogueHaley",
+      "Entries": {
+        "Rainy_Night_4": "I made a hot meal for you, honey. Lots of spice, just how you like it. Enjoy! [727 231 207 199 SkittysAsparagus.SpicyAsparagusStirfry]$h"
+      },
+      
+    "Action": "EditData",
+      "Target": "Characters/Dialogue/MarriageDialogueKrobus",
+      "Entries": {
+        "Indoor_Day_1": "I tried my best to make human food... [203 204 651 225 SkittysAsparagus.GrilledAsparagus]#$e#You can eat it later, don't worry about it..."
+      },
+      
+    "Action": "EditData",
+      "Target": "Data/NpcGiftTastes",
+      "Entries": {
+        "Penny": "Thank you! I really love this!/60 376 651 72 164 218 230 244 254 SkittysAsparagus.Asparagus book_item/Thank you! This looks special./-6 20 22 ancient_item/Uh, it's for me? ...Thanks./-4 80 330 456 457 444 440 422 420/Ugh...I'm sorry, but I absolutely hate this./446 346 348 303 304 398 459 873/Thanks, this looks nice.//"
+      },
+      
+    "Action": "EditData",
+      "Target": "Data/NpcGiftTastes",
+      "Entries": {
+        "Maru": "Is that...? Oh wow, @! This is spectacular!/72 197 190 215 222 243 336 337 400 787 910 122/This is a super gift! Thank you!/-260 62 64 66 68 70 334 335 725 726 909 SkittysAsparagus.GrilledAsparagus edible_mushroom/Oh... That's for me? I'll just put it over here.../-4 330 414 410 404 724/Yuck! You thought I would like this?/340 342 430 416/Thanks.//"
+      },
+      
+    "Action": "EditData",
+      "Target": "Data/NpcGiftTastes",
+      "Entries": {
+        "Haley": "Oh my god, this is my favorite thing!!/221 421 SkittysAsparagus.SpicyAsparagusStirfry 610 88/*gasp*...for me? Thank you!/18 60 62 64 70 88 222 223 232 233 234 402 418/Ugh...that's such a stupid gift./-5 -6 -75 -79 -81 80 -27/Gross!/-4 16 330 74/Thank you. I love presents.//"
+      },
+
+      "Action": "EditData",
+      "Target": "Data/CookingRecipes",
+      "Entries": {
+        "Pasta Asparagus": "-5 1 246 1 SkittysAsparagus.Asparagus 1 424 1/923 6/SkittysAsparagus.PastaAsparagus/",
+        "Spicy Asparagus Stir fry": "247 1 719 1 SkittysAsparagus.Asparagus 1 248 1 829 1 423 1/923 6/SkittysAsparagus.SpicyAsparagusStirfry/",
+        "Grilled Asparagus": "247 1 SkittysAsparagus.Asparagus 2 248 1 829 1 635 1/923 6/SkittysAsparagus.GrilledAsparagus/"
 		},
 
       "Action": "EditData",
