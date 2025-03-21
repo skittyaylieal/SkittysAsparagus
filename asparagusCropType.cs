@@ -76,7 +76,7 @@ namespace SkittysAsparagus
         }
 
 
-        private void UpdateDormantState() // What to do while in dormat state
+        private void UpdateDormantState() // What to do while in dormant state
         {
             if (Game1.Date.Season.ToLower() != HarvestSeason.ToLower()) // Compares if the current season is not the harvest season to see if the crop should be dormant, CurrentPhase = 0, and .ToLower is to make sure both are properly comparable.
             {
